@@ -1,64 +1,107 @@
+# Browser Mc Wingspan 🚀
 
-# Bower Vexton
+A lightweight, hackable browser assistant that lives in your sidebar. Get AI-powered browsing superpowers without the complexity
+and make it through the [Eternal September](https://en.wikipedia.org/wiki/Eternal_September) unscathed.
 
-**Bower Vexton**, conosciuto anche come **Browser Mc Wingspan**, è il tuo assistente personale per navigare e interagire con le tue sessioni sul web. 
-Questo strumento è progettato per aiutarti nella navigazione dai primi giorni del [Settembre eterno](https://en.wikipedia.org/wiki/Eternal_September),
-offrendoti funzionalità avanzate come riassunti, traduzioni e molto altro direttamente dalla tua barra laterale del browser.
+## ✨ Key Features
 
-Attualmente in fase di test, il sistema utilizza **Groq** e **Cerebras** come modelli di linguaggio (LLM), 
-se ne possono integrare a piacere ma questi sono tra i migliori che offrono buone prestazioni 
-e un free tier che consente di non sbattersi troppo con configurazioni di server e spese in bolletta.
+- **Seamless Integration**: Lives right in your browser's sidebar for instant access
+- **Smart Interactions**: Summarize pages, translate content, and more
+- **Lightning Fast**: Powered by Groq, Cerebras or your favorite LLMs for exceptional performance
+- **Zero Config**: Get started in minutes with free LLM tiers - no credit card or server setup needed
+- **Highly Hackable**: Simple, clean codebase designed for easy customization
+
+## 🎯 Why Another Browser Assistant?
+
+While there are many AI assistants out there, Browser Mc Wingspan focuses on simplicity and hackability. 
+We believe the best tools are the ones you can easily make your own. 
+That's why we've made customization as straightforward as adding your code to `index::handleResponse` 
+and using our built-in helpers for page content and LLM interactions.
+
+## 🛠️ Installation
+
+*Note: The extension is currently in development and not yet available through official extension stores.*
+Download / clone it from the [repository](https://github.com/artsakenos/BrowserMcWingspan).
+
+### Prerequisites
+- A modern web browser (Chrome, Edge, or compatible)
+- API keys for your preferred LLM service (Cerebras and/or Groq)
+
+### Setup Steps
+
+1. **Configure Your Settings**
+   - Copy `config_user (template).js` to `config_user.js`
+   - Add your API keys and preferences
+   - You can use the `/set` command in the extension to override those values later:
+     ```
+     /set llm_models.cerebras.api_key csk-...  # for Cerebras
+     /set llm_models.groq.api_key gsk-...      # for Groq
+     ```
+
+2. **Install in Developer Mode**
+   - Open your browser's extension page:
+     - Chrome: `chrome://extensions`
+     - Edge: `edge://extensions`
+   - Enable **Developer Mode**
+   - Click **Load Unpacked Extension**
+   - Select the project folder
+
+## 💡 Usage Guide
+
+### Getting Started
+Once installed, click the extension icon to open the sidebar interface:
+
+![Screenshot of the user interface](./images/screen_pippo.png)
+
+### Key Features
+- **Page Analysis**: Get instant summaries and insights
+- **Translation**: Break down language barriers
+- **Voice Interface**: Chat using your microphone (currently being fixed)
+- **Custom Actions**: Extend functionality as needed
+
+### Available Commands
+| Command | Description |
+|---------|-------------|
+| `/clear` | Clear chat history |
+| `/llm {query}` | Direct LLM query about the page |
+| `/html` | View page HTML length |
+| `/text` | Show page text excerpt |
+| `/testedit` | Test page editing (try on Sardinia pages) |
+| `/set {var}` | Configure settings |
+| `/get {var}` | Retrieve settings |
+
+### Demo Video
+[![Watch the demo](https://img.youtube.com/vi/Ill-eXFV-mE/0.jpg)](https://www.youtube.com/watch?v=Ill-eXFV-mE)
+
+## 🔋 Credits & Acknowledgments
+
+- Icons by [Freepik](https://www.freepik.com/icon/customer-service_5617594#fromView=search&page=1&position=58&uuid=d5f46cdc-14ae-4819-92ce-dbfcc156ea7a)
+- Powered by [Groq](https://groq.com) and [Cerebras](https://cerebras.ai) LLMs
+
+## 🚧 Known Issues & Roadmap
+
+### Current Limitations
+- Microphone permissions may fail in some cases
+- Large web pages might cause performance issues
+- API key validation could be more robust
+
+### Upcoming Improvements
+- [ ] Enhanced error handling for invalid API keys
+- [ ] Microphone permission fix
+- [ ] Large page optimization (Error 413 on most llms)
+- [ ] Improved documentation
+- [ ] Add Cohere, Ollama, OpenAi, Anthropic, Google... wrappers.
+- [ ] Refactor llm.js code redundancy.
+- [ ] Add a Tool Library and Actions
+
+## 🤝 Contributing
+
+Your contributions are welcome! Feel free to:
+- Open issues for bugs or suggestions
+- Submit pull requests
+- Contact the maintainers with questions
+- Share your use cases and improvements
 
 ---
 
-## Installazione
-
-Al momento, l'estensione non è ancora pacchettizzata per una distribuzione ufficiale. Segui questi passaggi per configurarla manualmente:
-
-1. Quando ti verrà chiesto imposta le API KEY (previa registrazione ai loro servizi) nelle variabili apposite, ad esempio:
-   * `/set APIKEY_CEREBRAS csk-...` per [Cerebras LLM](https://cerebras.ai/)
-   * `/set APIKEY_GROQ csk-...` per [Groq LLM](https://groq.com/)
-2. Apri il browser e vai a `chrome://extensions` (per Chrome) o `edge://extensions` (per Edge), etc.  
-3. Finché non pubblicherò l'estensione, Abilita la **modalità sviluppatore** (di solito una spunta da qualche parte).
-4. Clicca su **Carica estensione non pacchettizzata** e seleziona la cartella del progetto.
-
----
-
-## Utilizzo
-
-Una volta installata l'estensione, puoi iniziare a utilizzarla immediatamente:
-
-![Screenshot dell'interfaccia utente](./images/screen_pippo.png)
-
-**Apri la sidebar**:
-Clicca sull'icona dell'estensione per aprire la barra laterale. Qui potrai interagire con la pagina web corrente.
-
-Puoi usare la chat, ad esempio, per 
-**riassumere** il contenuto della pagina,
-**tradurre** il testo in altre lingue,
-sfogarti, eseguire altre operazioni avanzate.
-
-**Comandi di test**:
-Per verificare il funzionamento dell'estensione, puoi utilizzare i seguenti comandi:  
-- **/html**: Mostra la lunghezza del codice HTML della pagina corrente.  
-- **/text**: Mostra un estratto del testo della pagina.
-- **/llm {tua richiesta}**: Chiede al llm di darti informazioni specifiche sulla pagina (Per ora così, poi impliciterò il comando).
-- **/testedit**: Test di edit della pagina, apri una pagina che parla di Sardegna per testare.
-- **/set, /get {variabile}**: imposta una variabile, utile per settaggi vari.
-- **/clear**: Pulisce la chat.
-
-**Microfono**:
-Potrai chiacchierare con l'assistente via microfono.
-
----
-
-![Screenshot dell'interfaccia utente](./images/screen_groq.png)
-
-# Credits
-
-* Icone by [Freepik](https://www.freepik.com/icon/customer-service_5617594#fromView=search&page=1&position=58&uuid=d5f46cdc-14ae-4819-92ce-dbfcc156ea7a).
-
-
----
-
-Se hai domande o suggerimenti, non esitare a contribuire al progetto, aprire issue, o a contattarmi direttamente. Buona navigazione con **Bower Vexton**! 🚀
+*Happy browsing with Browser Mc Wingspan! 🚀*

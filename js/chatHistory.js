@@ -52,7 +52,7 @@ export function clearChat() {
             const chatContainer = document.getElementById('chat-container');
             chatContainer.innerHTML = '';
             displayedMessages.clear();
-            addMessage('Chat pulita', 'system-message');
+            addMessage('Chat Cleared!', 'system-message');
         });
     };
 

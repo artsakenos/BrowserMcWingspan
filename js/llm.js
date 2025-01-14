@@ -1,20 +1,21 @@
+import { config_get } from "./config_user.js";
 
 export async function queryGroq(userInput, callback) {
-    const apiKey = localStorage.getItem('APIKEY_GROQ');
+    const apiKey = config_get('llm_models.groq.api_key');
     const url = 'https://api.groq.com/openai/v1/chat/completions';
 
     const data = {
         messages: [
             {
                 role: "system",
-                content: "Tu sei il mio assistente. Ti mostrerò una pagina web su cui sto lavorando e ti farò delle domande. Rispondi in modo sintetico, chiaro e amichevole."
+                content: config_get("prompt_main.<locale>")
             },
             {
                 role: "user",
                 content: userInput
             }
         ],
-        model: "llama-3.3-70b-versatile",
+        model: config_get('llm_models.groq.model'),
         temperature: 1,
         max_tokens: 512,
         top_p: 1,
@@ -23,7 +24,7 @@ export async function queryGroq(userInput, callback) {
     };
 
     if (apiKey === null) {
-        callback('Set your LLM API key: /set APIKEY_GROQ gsk...', null);
+        callback('Set your LLM API key in the config_user.js or with <i>/set llm_models.groq.api_key gsk...</i>', null);
         return;
     }
 
@@ -52,21 +53,21 @@ export async function queryGroq(userInput, callback) {
 
 
 export async function queryCerebras(userInput, callback) {
-    const apiKey = localStorage.getItem('APIKEY_CEREBRAS');
+    const apiKey = config_get('llm_models.<model_main>.api_key');
     const url = 'https://api.cerebras.ai/v1/chat/completions';
 
     const data = {
         messages: [
             {
                 role: "system",
-                content: "Tu sei il mio assistente. Ti mostrerò una pagina web su cui sto lavorando e ti farò delle domande. Rispondi in modo sintetico, chiaro e amichevole."
+                content: config_get("prompt_main.<locale>")
             },
             {
                 role: "user",
                 content: userInput
             }
         ],
-        model: "llama-3.3-70b",
+        model: config_get('llm_models.<model_main>.model'),
         temperature: 1,
         max_completion_tokens: 512,
         top_p: 1,
@@ -75,7 +76,7 @@ export async function queryCerebras(userInput, callback) {
     };
 
     if (apiKey === null) {
-        callback('Set your Cerebras API key: /set APIKEY_CEREBRAS csk...', null);
+        callback('Set your LLM API key in the config_user.js or with <i>/set llm_models.cerebras.api_key csk...</i>', null);
         return;
     }
 

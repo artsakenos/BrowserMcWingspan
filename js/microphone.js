@@ -1,3 +1,5 @@
+import { config_get } from "./config_user.js";
+
 let recognition = null;
 let isRecording = false;
 let permissionGranted = false;
@@ -15,7 +17,7 @@ export async function requestMicrophonePermission() {
         initSpeechRecognition();
         return true;
     } catch (error) {
-        console.error('Errore nei permessi del microfono:', error);
+        console.error('Error getting microphone permissions:', error);
         return false;
     }
 }
@@ -25,7 +27,7 @@ function initSpeechRecognition() {
         recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.continuous = false;
         recognition.interimResults = false;
-        recognition.lang = 'it-IT';
+        recognition.lang = config_get('locale');
 
         recognition.onstart = () => updateRecordingState(true);
         recognition.onresult = (event) => {
@@ -35,7 +37,7 @@ function initSpeechRecognition() {
             }
         };
         recognition.onerror = (event) => {
-            console.error('Errore nel riconoscimento vocale:', event.error);
+            console.error('Error during voice recognition:', event.error);
             updateRecordingState(false);
         };
         recognition.onend = () => updateRecordingState(false);
@@ -69,24 +71,24 @@ function updateRecordingState(recording) {
 export function tts(text) {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'it-IT'; // Imposta la lingua italiana
+        utterance.lang = config_get('locale');
         utterance.volume = 1; // Volume massimo (range da 0 a 1)
         utterance.rate = 1;   // Velocità normale (range da 0.1 a 10)
         utterance.pitch = 1;  // Tono normale (range da 0 a 2)
         window.speechSynthesis.speak(utterance);
 
         utterance.onstart = () => {
-            console.log('La sintesi vocale è iniziata.');
+            console.log('TTS Started.');
         };
 
         utterance.onend = () => {
-            console.log('La sintesi vocale è terminata.');
+            console.log('TTS Finished.');
         };
 
         utterance.onerror = (event) => {
-            console.error('Errore durante la sintesi vocale:', event.error);
+            console.error('Error during the vocal synthesis:', event.error);
         };
     } else {
-        console.error('Il browser non supporta l\'API SpeechSynthesis.');
+        console.error('This browser doesn\'t support API SpeechSynthesis.');
     }
 }

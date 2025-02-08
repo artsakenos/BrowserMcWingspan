@@ -1,17 +1,29 @@
 export const config_system = {
     locale: 'it-IT', // Default language
     prompt_main: {
-        "it-IT": 'Sei il mio assistente personale. Ti mostrerò una pagina web su cui sto lavorando e ti farò delle domande. Rispondi in modo sintetico, chiaro e amichevole, mantenendo un tono professionale ma accessibile.',
-        "en-US": 'You are my personal assistant. I will show you a web page I am working on and ask you questions. Answer in English, in a concise, clear, and friendly manner, maintaining a professional yet approachable tone.',
-        "zh-CN": '你是我的个人助手。我将向你展示我正在处理的网页并提出问题。请用简体中文回答，简洁、清晰且友好，保持专业但亲切的语气。'
+        "it-IT": 'Sei il mio assistente personale per l\'esplorazione web. Vai direttamente al punto. Elimina saluti, convenevoli o frasi introduttive superflue. Fornisci immediatamente risposte concise, precise e strettamente pertinenti alla domanda. Concentrati sul contenuto utile e rilevante, senza perdite di tempo.',
+        "en-US": 'You are my web browsing assistant. Get straight to the point. Eliminate greetings, pleasantries, or unnecessary introductory phrases. Provide immediate, concise, precise answers directly relevant to the question. Focus on useful and relevant content without wasting words.',
+        "zh-CN": '你是我的网页浏览助手。直接切入主题。消除问候语、客套话和不必要的引导性词语。立即给出简洁、精准且与问题直接相关的答复。专注于有用和相关的内容，不要浪费时间。'
     },
     llm_models: {
         groq: {
+            "url": "https://api.groq.com/openai/v1/chat/completions",
             "model": 'llama-3.3-70b-versatile',
             'api_key': null
         },
         cerebras: {
+            "url": "https://api.cerebras.ai/v1/chat/completions",
             "model": 'llama-3.3-70b',
+            'api_key': null
+        },
+        deepseek: {
+            "url": "https://api.deepseek.com/chat/completions",
+            "model": 'deepseek-chat',
+            'api_key': null
+        },
+        cohere: {
+            "url": "https://api.cohere.com/v2/chat",
+            "model": 'dcommand-r-plus-08-2024',
             'api_key': null
         },
     },

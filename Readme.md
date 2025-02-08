@@ -86,13 +86,14 @@ Once installed, click the extension icon to open the sidebar interface:
 - API key validation could be more robust
 
 ### Upcoming Improvements
+- [x] Improved documentation
+- [x] Remove llm.js code redundancy
 - [ ] Enhanced error handling for invalid API keys
 - [ ] Microphone permission fix
 - [ ] Large page optimization (Error 413 on most llms)
-- [ ] Improved documentation
-- [ ] Add Cohere, Ollama, OpenAi, Anthropic, Google... wrappers.
-- [ ] Refactor llm.js code redundancy.
+- [ ] Add Cohere, Ollama, OpenAi, Anthropic, Google... wrappers
 - [ ] Add a Tool Library and Actions
+- [ ] Chat History in Context
 
 ## 🤝 Contributing
 

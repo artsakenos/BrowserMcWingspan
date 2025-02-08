@@ -1,14 +1,7 @@
 import { tts } from './microphone.js';
 import { addMessage, clearChat } from './chatHistory.js';
 import { getPageHtml, getPageText, testReplacer } from './pageParser.js'
-import { queryGroq, queryCerebras } from './llm.js'
-import { config_get } from './config_system.js';
-
-function getLLM() {
-    let queryLLM = queryGroq;
-    if (config_get('model_main.vendor') === 'cerebras') queryLLM = queryCerebras;
-    return queryLLM;
-}
+import { queryLLM } from './llm.js'
 
 export function handleCommands(message) {
 
@@ -66,7 +59,6 @@ export function handleCommands(message) {
 
             const fullPrompt = `${userInput}\n\n#Page Content#:\n${pageText}`;
 
-            let queryLLM = getLLM();
             queryLLM(fullPrompt, function (error, response) {
                 if (error) {
                     console.error('Errore:', error);
@@ -86,7 +78,6 @@ export function handleCommands(message) {
 
     if (!message.startsWith('/')) {
         const fullPrompt = message;
-        let queryLLM = getLLM();
 
         queryLLM(fullPrompt, function (error, response) {
             if (error) {

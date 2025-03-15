@@ -1,5 +1,6 @@
 export const config_system = {
-    locale: 'it-IT', // Default language
+    locale: 'en-US', // Default language
+    tts: 'on', // Text to Speech (on / off), Default on.
     prompt_main: {
         "it-IT": 'Sei il mio assistente personale per l\'esplorazione web. Vai direttamente al punto. Elimina saluti, convenevoli o frasi introduttive superflue. Fornisci immediatamente risposte concise, precise e strettamente pertinenti alla domanda. Concentrati sul contenuto utile e rilevante, senza perdite di tempo.',
         "en-US": 'You are my web browsing assistant. Get straight to the point. Eliminate greetings, pleasantries, or unnecessary introductory phrases. Provide immediate, concise, precise answers directly relevant to the question. Focus on useful and relevant content without wasting words.',
@@ -42,18 +43,16 @@ export const config_system = {
  * @returns {*} - The value corresponding to the path, or null if not found.
  */
 export function config_get(path, obj = config_system) {
-    const resolvedPath = path.replace(/<(\w+)>/g, (match, key) => obj[key] || match);
+    const resolvedPath = path.replace(/<(\w+)>/g, (match, key) => config_get(key, obj) || match);
     const keys = resolvedPath.split('.');
     let current = obj;
     for (const key of keys) {
         if (current && typeof current === 'object' && key in current) {
             current = current[key]; // Move deeper into the object
-        } else {
-            // If the path doesn't exist, check localStorage
-            const localStorageValue = localStorage.getItem(resolvedPath);
-            return localStorageValue !== null ? localStorageValue : null;
         }
     }
 
-    return current;
+    // If the value is in the localStorage, it has priority
+    const localStorageValue = localStorage.getItem(resolvedPath);
+    return localStorageValue !== null ? localStorageValue : current;
 }

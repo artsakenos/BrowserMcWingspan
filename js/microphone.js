@@ -70,7 +70,12 @@ function updateRecordingState(recording) {
 
 export function tts(text) {
     if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(text);
+        const tts_on = config_get('tts') === 'on';
+        if (!tts_on) return;
+        // Rimozione dei caratteri speciali.
+        const filteredText = text.replace(/[#*_\[\](){}`><~|\\]/g, '');
+
+        const utterance = new SpeechSynthesisUtterance(filteredText);
         utterance.lang = config_get('locale');
         utterance.volume = 1; // Volume massimo (range da 0 a 1)
         utterance.rate = 1;   // Velocità normale (range da 0.1 a 10)

@@ -1,14 +1,14 @@
 import { config_get } from "./config_user.js";
 
-const model_main = config_get('model_main');
-const apiKey = config_get('llm_models.<model_main>.api_key');
-const url = config_get('llm_models.<model_main>.url');
-const max_completion_tokens = 512;
-
 export async function queryLLM(userInput, callback) {
+    const model_main = config_get('model_main');
+    const apiKey = config_get('llm_models.<model_main>.api_key');
+    const url = config_get('llm_models.<model_main>.url');
+    const max_completion_tokens = 512;
 
     if (apiKey === null) {
-        callback(`Set your LLM API key in the config_user.js or with <i>/set llm_models.${modelType}.api_key gsk...</i>`, null);
+        callback(`Set your LLM API key in the config_user.js or with 
+            <br><b><i>/config llm_models.${model_main}.api_key gsk...</i>,</b>`, null);
         return;
     }
 
@@ -30,6 +30,7 @@ export async function queryLLM(userInput, callback) {
         stop: null
     };
 
+    // queryLLM() is ready for OpenAI style wrappers, but sometimes there are differences, handle them here. 
     switch (model_main) {
         case 'cerebras':
             data['max_completion_tokens'] = max_completion_tokens;

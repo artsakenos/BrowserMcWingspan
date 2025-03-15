@@ -36,7 +36,8 @@ body {
 }
 
 button {
-    padding: 8px 12px;
+    padding: 0 12px;
+    font-size: medium;
     background-color: #4CAF50;
     color: white;
     border: none;

@@ -2,10 +2,22 @@ import { tts } from './microphone.js';
 import { addMessage, clearChat } from './chatHistory.js';
 import { getPageHtml, getPageText, testReplacer } from './pageParser.js'
 import { queryLLM } from './llm.js'
+import { config_get } from './config_system.js';
 
 export function handleCommands(message) {
 
     if (message === '/clear') clearChat();
+
+    if (message.startsWith('/help') || message.startsWith('/?')) {
+        const helpUrl = 'https://github.com/artsakenos/BrowserMcWingspan?tab=readme-ov-file#-usage-guide';
+        chrome.tabs.create({ url: helpUrl }, () => {
+            if (chrome.runtime.lastError) {
+                addMessage('Error: Unable to open the help page. Please check your internet connection or try again later.', 'error-message');
+            } else {
+                addMessage('Opening the usage guide in a new tab...', 'response-message');
+            }
+        });
+    }
 
     if (message === '/html') {
         getPageHtml((pageHtml, error) => {
@@ -22,28 +34,47 @@ export function handleCommands(message) {
         });
     }
 
-    if (message.startsWith('/set')) {
-        const [varName, ...varValueParts] = message.slice(4).trim().split(' ');
-        const varValue = varValueParts.join(' ');
-        if (varName && varValue) {
-            localStorage.setItem(varName, varValue);
-            addMessage(`Successfully set variable "${varName}" with value "${varValue}".`, 'response-message');
-        } else {
-            addMessage('Error: Provide both a variable name and a value. Example: /set myVar myValue', 'error-message');
-        }
-    }
+    if (message.startsWith('/config')) {
+        const args = message.slice(7).trim().split(' '); // Rimuove "/config" e divide i parametri
+        const varName = args[0]; // Nome della variabile (primo parametro)
+        const varValue = args.slice(1).join(' '); // Valore della variabile (tutto il resto)
 
-    if (message.startsWith('/get')) {
-        const varName = message.slice(4).trim();
-        if (varName) {
-            const varValue = localStorage.getItem(varName);
-            if (varValue !== null) {
-                addMessage(`Value of "${varName}": ${varValue}`, 'response-message');
-            } else {
-                addMessage(`Error: Variable "${varName}" not found.`, 'error-message');
+        // 1. Se non ci sono parametri, mostra tutte le variabili
+        if (!varName) {
+            const allVariables = { ...localStorage }; // Copia tutte le variabili dal localStorage
+            let output = 'No Variables in localStorage.\n';
+            if (Object.keys(allVariables).length !== 0) {
+                output = 'Variables in localStorage:\n';
+                for (const [key, value] of Object.entries(allVariables)) {
+                    output += `- <b>${key}</b>: ${value}\n`;
+                }
             }
-        } else {
-            addMessage('Error: Provide a variable name. Example: /get myVar', 'error-message');
+            output += '\n<i>/config locale</i> ' + config_get('locale');
+            output += '\n<i>/config model_main</i> ' + config_get('model_main');
+            addMessage(output, 'response-message');
+
+        }
+        // 2. Se c'è solo il nome della variabile, mostra il valore
+        else if (!varValue) {
+            if (/^[a-zA-Z0-9._]+$/.test(varName)) { // Regex aggiornata
+                const storedValue = localStorage.getItem(varName);
+                if (storedValue !== null) {
+                    addMessage(`Value of "${varName}": ${storedValue}`, 'response-message');
+                } else {
+                    addMessage(`Error: Variable "${varName}" not found.`, 'error-message');
+                }
+            } else {
+                addMessage('Error: Variable name must be alphanumeric and can include dots (.) and underscores (_).', 'error-message');
+            }
+        }
+        // 3. Se ci sono nome e valore, imposta la variabile
+        else {
+            if (/^[a-zA-Z0-9._]+$/.test(varName)) { // Regex aggiornata
+                localStorage.setItem(varName.trim(), varValue.trim());
+                addMessage(`Successfully set variable <b>"${varName}"</b> with value <b>"${varValue}"</b>.`, 'response-message');
+            } else {
+                addMessage('Error: Variable name must be alphanumeric and can include dots (.) and underscores (_).', 'error-message');
+            }
         }
     }
 
@@ -74,6 +105,11 @@ export function handleCommands(message) {
     if (message === '/testedit') {
         // Test di modifica della pagina.
         testReplacer((error, response) => { addMessage(response, 'response-message'); })
+    }
+
+    if (message === '/clearls') {
+        localStorage.clear();
+        addMessage('Tutto il localStorage è stato cancellato.', 'response-message');
     }
 
     if (!message.startsWith('/')) {

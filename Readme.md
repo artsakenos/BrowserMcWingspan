@@ -1,7 +1,8 @@
-# Browser Mc Wingspan 🚀
+# Browser Assistant 🚀
 
-A lightweight, hackable browser assistant that lives in your sidebar. 
-Get AI-powered browsing superpowers without the complexity.
+A lightweight, hackable browser assistant that lives in your sidebar,
+ingests your page whenever you ask, and gives you AI-powered browsing superpowers, 
+for free.
 
 ## ✨ Key Features
 

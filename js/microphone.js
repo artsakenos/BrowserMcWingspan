@@ -18,6 +18,9 @@ export async function requestMicrophonePermission() {
         return true;
     } catch (error) {
         console.error('Error getting microphone permissions:', error);
+        if (error.name === 'NotAllowedError') {
+            alert('Microphone access was denied. Please enable it in your browser settings and try again.');
+        }
         return false;
     }
 }

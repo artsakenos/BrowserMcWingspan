@@ -14,7 +14,7 @@ export function handleCommands(message) {
             if (chrome.runtime.lastError) {
                 addMessage('Error: Unable to open the help page. Please check your internet connection or try again later.', 'error-message');
             } else {
-                addMessage('Opening the usage guide in a new tab...', 'response-message');
+                addMessage('Version 25.03.30 - Opening the usage guide in a new tab...', 'response-message');
             }
         });
     }

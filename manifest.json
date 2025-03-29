@@ -20,13 +20,13 @@
     "scripting",
     "activeTab",
     "storage",
-    "sidePanel"
+    "sidePanel",
+    "audioCapture"
   ],
   "host_permissions": [
     "<all_urls>"
   ],
   "optional_permissions": [
-    "audioCapture"
   ],
   "side_panel": {
     "default_path": "index.html"

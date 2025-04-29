@@ -1,7 +1,7 @@
 # Browser Assistant 🚀
 
 A lightweight, hackable browser assistant that lives in your sidebar,
-ingests your page whenever you ask, and gives you AI-powered browsing superpowers, 
+ingests your page if you ask it, and gives you AI-powered browsing superpowers, 
 for free.
 
 ## ✨ Key Features
@@ -35,7 +35,7 @@ If you install the extension in developer mode, you need to:
 2. **Configure Your Settings**
    - Edit the `config_user.js` configuration file
    - Add your API keys and preferences
-   - But, you can use the `/config` [command](#commands) to write or override those values later.
+   - **Or**, you can use the `/config` [command](#commands) later to write or override those values.
 
 3. **Install the Extension**
    - Open your browser's extension page:

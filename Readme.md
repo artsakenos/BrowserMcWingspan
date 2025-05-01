@@ -119,14 +119,14 @@ Note that values in local storage have priority over system and user configurati
 - [x] Improved documentation
 - [x] Remove llm.js code redundancy
 - [x] Enhanced error handling for invalid API keys
-- [ ] Microphone permission fix
-- [ ] Handle Large page and context (Error 413 on most llms)
 - [x] Add Cohere, Ollama, OpenAi, Anthropic, Google... wrappers
+- [x] Remove punctuation from tts
+- [x] Make locale changeable from local storage
+- [ ] Microphone permission fix
+- [ ] Handle Large page and context (Error 413 on most llms), setting up a *max_context* parameter for the model
 - [ ] Add an agentic Tool Library and Actions
 - [ ] Chat History in Context
-- [x] Remove punctuation from tts
 - [ ] Add informations to the /config command
-- [x] Make locale changeable from local storage
 
 ## 🤝 Contributing
 

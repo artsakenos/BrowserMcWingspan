@@ -1,5 +1,5 @@
 import { requestMicrophonePermission, startRecognition, stopRecognition, setOnInputCallback, tts } from './microphone.js';
-import { addMessage, clearChat, loadChatHistory } from './chatHistory.js';
+import { addMessage, loadChatHistory } from './chatHistory.js';
 import { handleCommands } from './handle_commands.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Callback per dopo il riconoscimento vocale
+    // Callback for the microphone input
     setOnInputCallback((text) => handleInput("/llm " + text));
 
     // Gestione microfono

@@ -69,11 +69,13 @@ Once installed, click the extension icon to open the sidebar interface:
 
 To use the extension you need to set some configuration once only.
 To interact with an LLM you need to choose the model and provide the API Keys.
-Supported LLMs: *groq*, *cerebras*, *deepseek*, *cohere*. Default: *cerebras*.
+Supported LLMs: *groq*, *cerebras*, *deepseek*, *cohere*, *ollama*. Default: *cerebras*.
 
 * `/config locale it-IT`  # The System Locale, optional, default = en-US.
 * `/config model_main cerebras` # Choose your favorite LLM, optional, default: cerebras.
 * `/config llm_models.cerebras.api_key gsk_...` # Configure your chosen LLM API Key, mandatory.
+* `/config model_main ollama` # Switch to Ollama.
+* `/config llm_models.ollama.model llama3` # Tell Ollama which model to use, default: llama3.
 * `/config` # Show the current configuration.
 
 Note that values in local storage have priority over system and user configuration.
@@ -119,7 +121,8 @@ Note that values in local storage have priority over system and user configurati
 - [x] Improved documentation
 - [x] Remove llm.js code redundancy
 - [x] Enhanced error handling for invalid API keys
-- [x] Add Cohere, Ollama, OpenAi, Anthropic, Google... wrappers
+- [x] Add Cohere, Ollama wrappers
+- [ ] Add OpenAi, Anthropic, Google... wrappers
 - [x] Remove punctuation from tts
 - [x] Make locale changeable from local storage
 - [ ] Microphone permission fix

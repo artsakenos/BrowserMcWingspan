@@ -27,6 +27,11 @@ export const config_system = {
             "model": 'dcommand-r-plus-08-2024',
             'api_key': null
         },
+        ollama: {
+            "url": "http://localhost:11434/api/chat",
+            "model": 'llama3',
+            'api_key': 'ollama'
+        },
     },
     model_main: 'groq',
 };

@@ -30,7 +30,7 @@ export const config_system = {
         ollama: {
             "url": "http://localhost:11434/api/chat",
             "model": 'llama3',
-            'api_key': 'ollama'
+            'api_key': null
         },
     },
     model_main: 'groq',

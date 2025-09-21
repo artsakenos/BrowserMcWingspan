@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Browser Mc Wingspan",
-  "version": "0.2.250501",
+  "version": "0.3.250801",
   "description": "A smart browser extension assistant that answers questions, checks the page you're on, and gets stuff done for you.",
   "action": {
     "default_title": "Open Sidebar Chat",

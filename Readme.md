@@ -112,13 +112,7 @@ Note that values in local storage have priority over system and user configurati
 
 ## 🚧 Known Issues & Roadmap
 
-### Current Limitations
-- Microphone permissions may fail in some cases
-- Large web pages might cause performance issues
-- API key validation could be more robust
-
-### Upcoming Improvements
-- [x] Improved documentation
+- [x] Improve documentation
 - [x] Remove llm.js code redundancy
 - [x] Enhanced error handling for invalid API keys
 - [x] Add Cohere, Ollama wrappers
@@ -126,7 +120,7 @@ Note that values in local storage have priority over system and user configurati
 - [x] Remove punctuation from tts
 - [x] Make locale changeable from local storage
 - [ ] Microphone permission fix
-- [ ] Handle Large page and context (Error 413 on most llms), setting up a *max_context* parameter for the model
+- [ ] Large page and context (Error 413 on most llms) can raise issues, setting up a *max_context* parameter for the model
 - [ ] Add an agentic Tool Library and Actions
 - [ ] Chat History in Context
 - [ ] Add informations to the /config command
